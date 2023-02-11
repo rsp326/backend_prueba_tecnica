@@ -1,0 +1,8 @@
+Pasos para la ejecución del proyecto
+1 se debe tener instalado la base de datos de MYsql o la de preferencia para trabajar con SQL
+2 se debe crear un esquema de bases de datos con el nombre "proyectos_de_vivienda"
+3 ejecutar el  scrip que se encuentra en la estructura del proyecto llamado "scriptBD.sql" para la creación de las tablas de la base de datos
+4 en los controladores se encuentra el string deconección llamado "_conection" , se debe de actualiazar el usuario, contraseña y 
+  puerto de conección de la base de datos (por defecto se esta utilizando el usuario root y el puerto 3306)
+5 ejecutar la aplicación y verificar el puerto por donde esta corriendo el microservicio
+6 la documentacion de la api ser enviada para importala en postman y realizar las pruebas o consumos a los recursos expuestos

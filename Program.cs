@@ -2,26 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("CorsPolicy",
-//        builder => builder.AllowAnyOrigin()
-//        .AllowAnyMethod()
-//        .AllowAnyHeader()
-//        .AllowCredentials());
-//});
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAnyOrigin",
-        builder => builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
-});
-//builder.Services.Configure<MvcOptions>(options => {
-//    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
-//});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers()
@@ -31,6 +11,15 @@ builder.Services.AddControllers()
     });
 var app = builder.Build();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corsPolicy",
+        builder => builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -38,6 +27,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseCors("corsPolicy");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

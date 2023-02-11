@@ -1,6 +1,28 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("CorsPolicy",
+//        builder => builder.AllowAnyOrigin()
+//        .AllowAnyMethod()
+//        .AllowAnyHeader()
+//        .AllowCredentials());
+//});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        builder => builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
+//builder.Services.Configure<MvcOptions>(options => {
+//    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
+//});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
